@@ -24,11 +24,4 @@ public class BridgeGenerator : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (playerController.bricks.Count > 0)
-        {
-            meshRenderer.enabled = true;
-        }
-    }
 }
