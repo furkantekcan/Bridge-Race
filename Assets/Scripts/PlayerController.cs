@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Vector3 newPos =  new Vector3(0, 0, 0);
 
+    //
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -72,15 +75,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.transform.name);
-
+      
         if (other.transform.parent.name == "Bricks")
         {
             other.transform.SetParent(transform.GetChild(0));
-            //newPos = transform.GetChild(0).localPosition;
-            //newPos.z = 0;
-            //newPos.x = 0;
-            
             Debug.Log(transform.GetChild(0).localPosition);
 
             other.transform.localRotation = new Quaternion(0, 0.7071068f, 0, 0.7071068f);
@@ -89,6 +87,15 @@ public class PlayerController : MonoBehaviour
             newPos.y += 0.2f;
 
             bricks.Add(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name == "Stair")
+        {
+            collision.transform.GetComponent<MeshRenderer>().enabled = true;
+            collision.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 }
